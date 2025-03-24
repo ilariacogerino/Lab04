@@ -9,6 +9,8 @@ class SpellChecker:
         self._view = view
 
     def handleSentence(self, txtIn, language, modality):
+
+        self._view.__txtOut.controls.append(ft.Text(f"Frase inserita: {txtIn}"))
         txtIn = replaceChars(txtIn.lower())
 
         words = txtIn.split()
