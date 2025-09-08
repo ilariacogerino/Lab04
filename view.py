@@ -36,7 +36,7 @@ class View(object):
 
         # modality + txtIn + Spell check button
         self.ddModality = ft.Dropdown(label="Search Modality",
-                                        options=[ft.DropdownOption("Contains"), ft.DropdownOption("Linear"), ft.DropdownOption("Dichotomic")],
+                                        options=[ft.DropdownOption("Default"), ft.DropdownOption("Linear"), ft.DropdownOption("Dichotomic")],
                                         on_change=self.__controller.handleModality)
         self.txtIn = ft.TextField(label="Add your sentence here")
         self.btnSpellCheck = ft.ElevatedButton(text="Spell Check",

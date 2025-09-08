@@ -59,7 +59,7 @@ class SpellChecker:
 
     def handleSpellCheck(self, e):
         sentence = self._view.txtIn.value
-        print(sentence)
+        #print(sentence)
         if sentence == "":
             self._view.txtOut.controls.clear()
             self._view.txtOut.controls.append(ft.Text(value="Add a sentence!"))
@@ -74,6 +74,8 @@ class SpellChecker:
             self._view.txtOut.controls.clear()
             self._view.txtOut.controls.append(ft.Text(value="Select modality!"))
             return
+
+        #print(language, modality)
 
         result = self.handleSentence(str(sentence), language, modality)
         if result is None:
