@@ -46,25 +46,26 @@ class SpellChecker:
 
 
     def handleLanguage(self, e):
-        self._view.__txtOut.controls.append(
-            ft.Text(value="Language correctly selected: " + self._view.__ddLanguage.value))
+        self._view.txtOut.controls.append(
+            ft.Text(value="Language correctly selected: " + self._view.ddLanguage.value))
         self._view.page.update()
 
 
     def handleModality(self, e):
-        self._view.__txtOut.controls.append(
-            ft.Text(value="Search modality correctly selected: " + self._view.__ddModality.value))
+        self._view.txtOut.controls.append(
+            ft.Text(value="Search modality correctly selected: " + self._view.ddModality.value))
         self._view.page.update()
 
 
     def handleSpellCheck(self, e):
-        sentence = self._view.__txtInt.value
+        sentence = self._view.txtIn.value
+        print(sentence)
         if sentence == "":
-            self._view.__txtOut.controls.clear()
-            self._view.__txtOut.controls.append(ft.Text(value="Add a sentence!"))
+            self._view.txtOut.controls.clear()
+            self._view.txtOut.controls.append(ft.Text(value="Add a sentence!"))
             return
-        language = self._view.__ddLanguage.value
-        modality = self._view.__ddModality.value
+        language = self._view.ddLanguage.value
+        modality = self._view.ddModality.value
         if language == "":
             self._view.txtOut.controls.clear()
             self._view.txtOut.controls.append(ft.Text(value="Select language!"))
@@ -74,12 +75,17 @@ class SpellChecker:
             self._view.txtOut.controls.append(ft.Text(value="Select modality!"))
             return
 
-        words, elapsedTime = self.handleSentence(sentence, language, modality)
+        result = self.handleSentence(str(sentence), language, modality)
+        if result is None:
+            self._view.txtOut.controls.append(ft.Text("Unknown modality"))
+            self._view.page.update()
+            return
 
-        self._view.__txtOut.controls.clear()
-        self._view.__txtOut.controls.append(ft.Text("Sentence : " + sentence))
-        self._view.__txtOut.controls.append(ft.Text("Errors: " + words))
-        self._view.__txtOut.controls.append(ft.Text(value="Elapsed time: " + str(elapsedTime)))
+        words, elapsedTime = result
+        self._view.txtOut.controls.clear()
+        self._view.txtOut.controls.append(ft.Text("Sentence : " + sentence))
+        self._view.txtOut.controls.append(ft.Text("Errors: " + words))
+        self._view.txtOut.controls.append(ft.Text(value="Elapsed time: " + str(elapsedTime)))
 
         self._view.page.update()
 

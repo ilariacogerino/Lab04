@@ -14,11 +14,11 @@ class View(object):
         # UI elements
         self.__title = None
         self.__theme_switch = None
-        self.__ddLanguage = None
-        self.__ddModality = None
-        self.__txtInt = None
-        self.__btnSpellCheck = None
-        self.__txtOut = None
+        self.ddLanguage = None
+        self.ddModality = None
+        self.txtIn = None
+        self.btnSpellCheck = None
+        self.txtOut = None
 
 
     def add_content(self):
@@ -29,24 +29,24 @@ class View(object):
         self.page.add(row1)
 
         # select language
-        self.__ddLanguage = ft.Dropdown(label="Select Language",
+        self.ddLanguage = ft.Dropdown(label="Select Language",
                                         options=[ft.DropdownOption("english"), ft.DropdownOption("italian"), ft.DropdownOption("spanish")],
                                         on_change=self.__controller.handleLanguage)
-        self.page.add(self.__ddLanguage)
+        self.page.add(self.ddLanguage)
 
         # modality + txtIn + Spell check button
-        self.__ddModality = ft.Dropdown(label="Search Modality",
+        self.ddModality = ft.Dropdown(label="Search Modality",
                                         options=[ft.DropdownOption("Contains"), ft.DropdownOption("Linear"), ft.DropdownOption("Dichotomic")],
                                         on_change=self.__controller.handleModality)
-        self.__txtInt = ft.TextField(label="Add your sentence here")
-        self.__btnSpellCheck = ft.ElevatedButton(text="Spell Check",
+        self.txtIn = ft.TextField(label="Add your sentence here")
+        self.btnSpellCheck = ft.ElevatedButton(text="Spell Check",
                                                  on_click=self.__controller.handleSpellCheck)
-        row2 = ft.Row(controls=[self.__ddModality, self.__txtInt, self.__btnSpellCheck])
+        row2 = ft.Row(controls=[self.ddModality, self.txtIn, self.btnSpellCheck], alignment=ft.MainAxisAlignment.CENTER)
         self.page.add(row2)
 
         # listview to write from controller
-        self.__txtOut = ft.ListView(expand=1, spacing=10)
-        self.page.add(self.__txtOut)
+        self.txtOut = ft.ListView(expand=1, spacing=10)
+        self.page.add(self.txtOut)
 
 
         self.page.update()
